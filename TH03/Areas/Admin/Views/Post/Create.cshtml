@@ -1,0 +1,61 @@
+﻿@model TH03.Models.Post
+@{
+    Layout = "~/Areas/Admin/Views/Shared/_Layout.cshtml";
+}
+<main id="main" class="main">
+    <div class="pagetitle">
+        <h2>Them moi</h2>
+    </div>
+    <form asp-action=" Create" asp-controller="Post" asp-area="Admin" method="post">
+        <div class="form-row">
+            <div class="form-group col-md-12">
+                <label asp-for="Title">Title</label>
+                <input type="text" class="form-control mb-3" asp-for="Title" />
+            </div>
+            <div class="form-group col-md-12">
+                <label asp-for="Abstract">ABs</label>
+                <input type="text" class="form-control mb-3" asp-for="Abstract" />
+            </div>
+            <div class="form-group col-md-12">
+                <label class="control-lable">Image</label>
+                <div class="inut-group mb-3">
+                    <div class="input-group-prepend">
+                        <button class="btn btn-success" type="button" onclick="openDialog()">chon anh</button>
+                    </div>
+                    <input type="text" class="form-control" asp-for="Images" id="file_input" aria-describedby="button-addon-2" />
+                </div>
+            </div>
+            <div class="form-group col-md-12">
+                <label asp-for="Contents">content</label>
+                <textarea asp-for="Contents" cite="form-control"></textarea>
+            </div>
+            <div form-group col-md-6 mt-3 mb-3>
+                <label>
+                    @Html.CheckBox("IsActive", false)
+                    Hien thi
+                </label>
+            </div>
+            <div class="form-group d-none">
+                <input asp-for="CreatedDate" class="form-control" />
+            </div>
+            <div class="form-group d-none">
+                <input asp-for="PostOrder" class="form-control" value="1" />
+            </div>
+            <div class="form-group d-none">
+                <input asp-for="Category" class="form-control" value="1" />
+            </div>
+            <div class="form-group d-none">
+                <input asp-for="Status" class="form-control" value="1" />
+            </div>
+            <div class="form-group d-none">
+                <input asp-for="Link" class="form-control" value=" null" />
+            </div>
+        </div>
+        <button type="submit" class="btn btn-lg btn-primary p-2"><i class="bi bi-file-plus-fill"></i>Save</button>
+        <a asp-controller="Menu" asp-action="Index" class=" btn btn-lg btn-warning p-2">Back</a>
+    </form>
+</main>
+@{
+    var summernote = new TH03.Areas.Admin.Models.SummerNote("#file_input");
+    <partial name="_SummerNote" model="summernote"></partial>
+}
